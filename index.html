@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kalyani Mohite Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: #fff;
+      font-family: Helvetica, sans-serif;
+      overflow-x: hidden;
+      padding-top: 64px;
+    }
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      text-align: center;
+    }
+    .hero-intro {
+      font-size: 1.15rem;
+      color: #e0e0e0;
+      margin: 32px 0 0 0;
+      max-width: 700px;
+      text-align: left;
+      line-height: 1.7;
+      opacity: 0;
+      animation: fadeIn 1s ease-out 2s forwards;
+    }
+    h1 {
+      font-size: 4rem;
+      margin: 0;
+      position: relative;
+      bottom: -100px;
+      opacity: 0;
+      animation: rise 1.5s ease-out 0.5s forwards;
+      letter-spacing: 0.2rem;
+    }
+    h2 {
+      font-size: 1.5rem;
+      margin: 10px 0 20px;
+      opacity: 0;
+      animation: fadeIn 1s ease-out 2s forwards;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      gap: 2rem;
+      opacity: 0;
+      animation: fadeIn 1s ease-out 2.5s forwards;
+    }
+    nav ul li {
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    nav ul li:hover {
+      color: #888;
+    }
+    
+    /* Top navigation bar */
+    .top-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background-color: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 15px 0;
+      display: none;
+    }
+    .top-nav .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 30px;
+    }
+    .top-nav .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .top-nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      gap: 2rem;
+      opacity: 1;
+    }
+    .top-nav ul li {
+      cursor: pointer;
+      padding: 8px 16px;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+    }
+    .top-nav ul li:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+    .top-nav ul li.active {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-weight: bold;
+    }
+    
+    .section {
+      min-height: 100vh;
+      padding: 80px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .education {
+      background-color: #111;
+      padding-top: 0;
+    }
+    .education h2 {
+      font-size: 3rem;
+      margin-bottom: 50px;
+      text-align: center;
+      letter-spacing: 0.1rem;
+    }
+    .hidden {
+      display: none;
+    }
+    @keyframes rise {
+      to {
+        bottom: 0;
+        opacity: 1;
+      }
+    }
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+    .education-item {
+      background-color: #222;
+      padding: 30px;
+      margin: 20px 0;
+      border-radius: 10px;
+      max-width: 800px;
+      width: 100%;
+      box-sizing: border-box;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .education-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+    }
+    .education-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+    }
+    .school-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #fff;
+    }
+    .location {
+      font-size: 1.1rem;
+      color: #ccc;
+    }
+    .date {
+      font-size: 1rem;
+      color: #888;
+      text-align: right;
+    }
+    .degree {
+      font-size: 1.2rem;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .gpa {
+      font-size: 1rem;
+      color: #ccc;
+      margin-bottom: 15px;
+    }
+    .coursework {
+      font-size: 0.95rem;
+      color: #aaa;
+      line-height: 1.6;
+    }
+    /* Big stacked education boxes */
+    .education-boxes {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      align-items: center;
+    }
+    .education-box {
+      background: linear-gradient(90deg, #8e24aa 0 6px, #23213a 6px 100%);
+      color: #fff;
+      border-radius: 22px;
+      box-shadow: 0 6px 32px rgba(142,36,170,0.13);
+      width: 100%;
+      max-width: 900px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: box-shadow 0.3s, transform 0.2s;
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-left: 0 solid transparent;
+    }
+    .education-box:hover {
+      box-shadow: 0 16px 48px rgba(142,36,170,0.18);
+      transform: translateY(-4px) scale(1.015);
+    }
+    .education-box-header {
+      font-size: 1.5rem;
+      font-weight: bold;
+      background: #00e676;
+      color: #111;
+      padding: 28px 40px;
+      border-radius: 18px 18px 0 0;
+      letter-spacing: 0.05em;
+      transition: background 0.3s;
+      text-align: left;
+    }
+    .education-box.open .education-box-header {
+      background: #00b050;
+      color: #fff;
+    }
+    .education-box-details {
+      max-height: 0;
+      overflow: hidden;
+      background: #222;
+      color: #fff;
+      padding: 0 40px;
+      transition: max-height 0.5s cubic-bezier(.77,0,.18,1), padding 0.5s;
+    }
+    .education-box.open .education-box-details {
+      max-height: 500px;
+      padding: 24px 40px 36px 40px;
+    }
+    .education-box-details ul {
+      margin: 0 0 0 18px;
+      padding: 0;
+      font-size: 1.08rem;
+    }
+    .education-box-details li {
+      margin-bottom: 8px;
+    }
+    .education-box-details strong {
+      color: #00e676;
+    }
+    .experience {
+      background-color: #111;
+      padding-top: 0;
+    }
+    .experience-boxes {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+      align-items: center;
+    }
+    .experience-box {
+      background: linear-gradient(90deg, #8e24aa 0 6px, #23213a 6px 100%);
+      color: #fff;
+      border-radius: 18px;
+      box-shadow: 0 6px 32px rgba(142,36,170,0.13);
+      width: 100%;
+      max-width: 700px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: box-shadow 0.3s, transform 0.2s;
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-left: 0 solid transparent;
+    }
+    .experience-box:hover {
+      box-shadow: 0 16px 48px rgba(142,36,170,0.18);
+      transform: translateY(-4px) scale(1.015);
+    }
+    .experience-header {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      background: #8e24aa;
+      color: #fff;
+      padding: 16px 28px 10px 28px;
+      border-radius: 14px 14px 0 0;
+      font-size: 1rem;
+      transition: background 0.3s;
+      position: relative;
+    }
+    .experience-box.open .experience-header {
+      background: #6a1b9a;
+      color: #fff;
+    }
+    .experience-title {
+      font-size: 1.08rem;
+      font-weight: bold;
+      letter-spacing: 0.02em;
+    }
+    .experience-company {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+    .experience-meta {
+      font-size: 0.95rem;
+      color: #e1bee7;
+      font-weight: 400;
+      margin-top: 1px;
+    }
+    .experience-details {
+      max-height: 0;
+      overflow: hidden;
+      background: #222;
+      color: #fff;
+      padding: 0 28px;
+      transition: max-height 0.5s cubic-bezier(.77,0,.18,1), padding 0.5s;
+      font-size: 0.98rem;
+    }
+    .experience-box.open .experience-details {
+      max-height: 400px;
+      padding: 14px 28px 20px 28px;
+    }
+    .experience-details ul {
+      margin: 0 0 0 18px;
+      padding: 0;
+      font-size: 0.98rem;
+    }
+    .experience-details li {
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+    .experience-toggle {
+      position: absolute;
+      right: 18px;
+      top: 18px;
+      font-size: 1.2em;
+      color: #fff;
+      background: none;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      transition: color 0.2s;
+      z-index: 2;
+    }
+    .experience-toggle:focus {
+      color: #e1bee7;
+    }
+    .social-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 32px;
+      margin-top: 32px;
+      margin-bottom: 0;
+      opacity: 0;
+      animation: fadeIn 1s ease-out 3s forwards;
+    }
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #181818;
+      color: #00e676;
+      font-size: 2rem;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      border: 2px solid transparent;
+    }
+    .social-link:hover {
+      background: #00e676;
+      color: #111;
+      border: 2px solid #00e676;
+    }
+    .social-link svg {
+      width: 26px;
+      height: 26px;
+      display: block;
+    }
+    .projects {
+      background-color: #111;
+      padding-top: 0;
+    }
+    .project-boxes {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+      align-items: center;
+    }
+    .project-box {
+      background: linear-gradient(90deg, #8e24aa 0 6px, #23213a 6px 100%);
+      color: #fff;
+      border-radius: 14px;
+      box-shadow: 0 6px 32px rgba(142,36,170,0.13);
+      width: 100%;
+      max-width: 700px;
+      overflow: hidden;
+      transition: box-shadow 0.3s, transform 0.2s;
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-left: 0 solid transparent;
+    }
+    .project-box:hover {
+      box-shadow: 0 16px 48px rgba(142,36,170,0.18);
+      transform: translateY(-4px) scale(1.015);
+    }
+    .project-title {
+      font-size: 1.15rem;
+      font-weight: bold;
+      background: #8e24aa;
+      color: #fff;
+      padding: 16px 28px 10px 28px;
+      border-radius: 14px 14px 0 0;
+      letter-spacing: 0.03em;
+      transition: background 0.3s;
+      text-align: left;
+    }
+    .project-details {
+      padding: 12px 28px 18px 28px;
+      background: #23213a;
+    }
+    .project-details ul {
+      margin: 0 0 0 18px;
+      padding: 0;
+      font-size: 0.98rem;
+    }
+    .project-details li {
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+    .skills {
+      background-color: #111;
+      padding-top: 0;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 18px;
+      max-width: 900px;
+      margin: 40px auto 0 auto;
+      width: 100%;
+    }
+    .skill-card {
+      background: #23213a;
+      color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(142,36,170,0.10);
+      padding: 18px 12px;
+      font-size: 1.05rem;
+      font-weight: 500;
+      text-align: center;
+      letter-spacing: 0.01em;
+      transition: box-shadow 0.2s, background 0.2s;
+    }
+    .skill-card:hover {
+      background: #8e24aa;
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(142,36,170,0.18);
+    }
+    /* Fixed top navigation bar for all pages */
+    .main-top-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      z-index: 2000;
+      background: rgba(20, 20, 30, 0.98);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 64px;
+    }
+    .main-top-nav ul {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+    }
+    .main-top-nav li {
+      color: #fff;
+      font-size: 1.08rem;
+      font-weight: 500;
+      cursor: pointer;
+      padding: 8px 18px;
+      border-radius: 20px;
+      transition: background 0.2s, color 0.2s;
+      letter-spacing: 0.01em;
+    }
+    .main-top-nav li:hover, .main-top-nav li.active {
+      background: #8e24aa;
+      color: #fff;
+    }
+    .skills-group-list {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .skills-group {
+      background: #23213a;
+      border-radius: 14px;
+      box-shadow: 0 2px 8px rgba(142,36,170,0.10);
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+      cursor: pointer;
+    }
+    .skills-group-header {
+      font-size: 1.13rem;
+      font-weight: bold;
+      color: #fff;
+      background: #8e24aa;
+      padding: 18px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      letter-spacing: 0.01em;
+      user-select: none;
+    }
+    .skills-group.open .skills-group-header {
+      background: #6a1b9a;
+    }
+    .skills-toggle {
+      font-size: 1.1em;
+      margin-left: 10px;
+      transition: transform 0.3s;
+    }
+    .skills-group.open .skills-toggle {
+      transform: rotate(180deg);
+    }
+    .skills-group-content {
+      max-height: 0;
+      overflow: hidden;
+      background: #23213a;
+      transition: max-height 0.5s cubic-bezier(.77,0,.18,1), padding 0.5s;
+      padding: 0 28px;
+    }
+    .skills-group.open .skills-group-content {
+      max-height: 400px;
+      padding: 18px 28px 24px 28px;
+    }
+    .dashboards {
+      background-color: #111;
+      padding-top: 0;
+    }
+    .dashboards-placeholder {
+      max-width: 700px;
+      margin: 40px auto 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      align-items: center;
+    }
+    .dashboard-card {
+      background: linear-gradient(90deg, #8e24aa 0 6px, #23213a 6px 100%);
+      color: #fff;
+      border-radius: 14px;
+      box-shadow: 0 6px 32px rgba(142,36,170,0.13);
+      width: 100%;
+      max-width: 700px;
+      padding: 32px 28px;
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <h1>KALYANI MOHITE</h1>
+    <div class="hero-intro">
+      I am a curious, motivated and passionate Computer Science graduate from George Mason University with a passion for making sense of data and building meaningful solutions. I have always been drawn to solving real-world problems, whether it's through analyzing patterns in data, creating dashboards that tell a story, or developing applications that improve everyday tasks. I enjoy working at the intersection of logic and creativity, and I am someone who thrives when I am learning something new or collaborating with others on impactful projects. Outside of work, I find joy in thoughtful conversations, long walks, and exploring different ways to grow both professionally and personally.
+    </div>
+    <div class="social-row">
+      <a class="social-link" href="https://www.linkedin.com/in/kalyanimohite26/" target="_blank" title="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.28c-.97 0-1.75-.79-1.75-1.75s.78-1.75 1.75-1.75 1.75.79 1.75 1.75-.78 1.75-1.75 1.75zm15.5 11.28h-3v-5.6c0-1.34-.03-3.07-1.87-3.07-1.87 0-2.16 1.46-2.16 2.97v5.7h-3v-10h2.89v1.36h.04c.4-.75 1.37-1.54 2.82-1.54 3.01 0 3.57 1.98 3.57 4.56v5.62z"/></svg>
+      </a>
+      <a class="social-link" href="mailto:kmohite@gmu.edu" title="Email">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 2v.01L12 13 4 6.01V6h16zm0 12H4V8.99l8 6.99 8-6.99V18z"/></svg>
+      </a>
+      <a class="social-link" href="https://github.com/TheKalyaniMohite" target="_blank" title="GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.66-.22.66-.48 0-.24-.01-.87-.01-1.7-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1.01.07 1.54 1.04 1.54 1.04.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85.004 1.71.115 2.51.337 1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85 0 1.34-.01 2.42-.01 2.75 0 .27.16.58.67.48A10.01 10.01 0 0 0 22 12c0-5.52-4.48-10-10-10z"/></svg>
+      </a>
+      <a class="social-link" href="tel:7048868432" title="Phone">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.07 21 3 13.93 3 5a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Navigation bar moved to top -->
+  <nav class="main-top-nav">
+    <ul>
+      <li onclick="showSection('home')" data-section="home">Home</li>
+      <li onclick="showSection('education')" data-section="education">Education</li>
+      <li onclick="showSection('experience')" data-section="experience">Experience</li>
+      <li onclick="showSection('projects')" data-section="projects">Projects</li>
+      <li onclick="showSection('skills')" data-section="skills">Skills</li>
+      <li onclick="showSection('dashboards')" data-section="dashboards">Dashboards</li>
+    </ul>
+  </nav>
+
+  <section id="education" class="section education hidden">
+    <div class="education-boxes">
+      <div class="education-box" id="msBox" onclick="toggleBox(this)">
+        <div class="education-box-header">MASTER OF SCIENCE</div>
+        <div class="education-box-details">
+          <ul>
+            <li><strong>Degree name:</strong> Master of Science</li>
+            <li><strong>Major:</strong> Computer Science</li>
+            <li><strong>School:</strong> George Mason University</li>
+            <li><strong>Duration:</strong> 2 years</li>
+            <li><strong>From:</strong> August 2023</li>
+            <li><strong>To:</strong> May 2025</li>
+            <li><strong>GPA:</strong> 3.9</li>
+            <li><strong>Relevant Coursework:</strong> Machine Learning, Generative AI, Data Mining, Advanced Algorithm Analysis, and Software Development</li>
+          </ul>
+        </div>
+      </div>
+      <div class="education-box" id="beBox" onclick="toggleBox(this)">
+        <div class="education-box-header">BACHELOR OF ENGINEERING</div>
+        <div class="education-box-details">
+          <ul>
+            <li><strong>Degree name:</strong> Bachelor of Engineering</li>
+            <li><strong>Major:</strong> Computer Science and Engineering</li>
+            <li><strong>School:</strong> University of Pune</li>
+            <li><strong>Duration:</strong> 4 years</li>
+            <li><strong>From:</strong> August 2018</li>
+            <li><strong>To:</strong> July 2022</li>
+            <li><strong>GPA:</strong> 3.5</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="section experience hidden">
+    <div class="experience-boxes">
+      <div class="experience-box" onclick="expandExperience(this)">
+        <div class="experience-header">
+          <div class="experience-title">Data Analyst</div>
+          <div class="experience-company">Fortune Services</div>
+          <div class="experience-meta">August 2022 – August 2023 | Nashik, India</div>
+          <button class="experience-toggle">&#9660;</button>
+        </div>
+        <div class="experience-details">
+          <ul>
+            <li>Led data integration projects on AWS S3, Redshift, and dbt to migrate and model 1 TB of marketing and CRM data, enabling end to end predictive analytics pipelines that improved campaign ROI by 20%.</li>
+            <li>Developed robust, scalable Python based ETL pipelines and optimized SQL scripts for multi-channel data aggregation, boosting throughput by 30% and automating reconciliation processes to reduce manual effort by 40%.</li>
+            <li>Collaborated with data engineers to train and validate Random Forest and Logistic Regression churn models achieving 85%+ accuracy, informing predictive maintenance strategies and reducing customer attrition.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="experience-box" onclick="expandExperience(this)">
+        <div class="experience-header">
+          <div class="experience-title">Data & Marketing Assistant</div>
+          <div class="experience-company">Early Identification Program | George Mason University</div>
+          <div class="experience-meta">April 2024 – May 2025 | Fairfax, VA</div>
+          <button class="experience-toggle">&#9660;</button>
+        </div>
+        <div class="experience-details">
+          <ul>
+            <li>Designed and executed robust SQL based data migration and ETL pipelines using Redshift and PostgreSQL to ingest, cleanse, and transform 500+ student engagement records boosting data accuracy by 25% and accelerating end to end pipeline runtime by 40%.</li>
+            <li>Built and maintained interactive Power BI and Tableau dashboards visualizing student demographics, engagement trends, and campaign performance, integrating drill down filters and automated refresh schedules to reduce report preparation time by 30%.</li>
+            <li>Documented end to end data workflows, schema designs, and analytical insights in Confluence and GitHub for cross-functional teams, authoring detailed reports and slide decks that supported 200+ data driven decisions per quarter.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="experience-box" onclick="expandExperience(this)">
+        <div class="experience-header">
+          <div class="experience-title">Data Analyst</div>
+          <div class="experience-company">Cybeorg Education Technology</div>
+          <div class="experience-meta">January 2023 – July 2023 | Remote</div>
+          <button class="experience-toggle">&#9660;</button>
+        </div>
+        <div class="experience-details">
+          <ul>
+            <li>Automated processing of 2,000+ feedback entries using Python and Pandas for sentiment analysis and visualization, identifying satisfaction drivers that drove course changes and boosted retention by 12%.</li>
+            <li>Conducted A/B tests on recommendation algorithms, refining click through and conversion KPIs, then deployed enhancements via a Flask-based AI app with real time monitoring.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="experience-box" onclick="expandExperience(this)">
+        <div class="experience-header">
+          <div class="experience-title">Data Analyst Trainee</div>
+          <div class="experience-company">Microsoft - George Mason University</div>
+          <div class="experience-meta">June 2024 – August 2024 | Remote</div>
+          <button class="experience-toggle">&#9660;</button>
+        </div>
+        <div class="experience-details">
+          <ul>
+            <li>Designed Azure Synapse pipelines to ingest and transform 500 GB/day of telemetry data, reducing latency around 40% and ensuring timely downstream reports.</li>
+            <li>Created Power BI dashboards with custom DAX measures halving ad-hoc report requests and incorporated R visuals to highlight usage trends.</li>
+            <li>Implemented basic anomaly detection using Azure ML and Python, generating alerts that cut incident resolution time by 15%.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="section projects hidden">
+    <div class="project-boxes">
+      <div class="project-box">
+        <div class="project-title">AI-Powered Resume Analyzer & Job Matcher</div>
+        <div class="project-details">
+          <ul>
+            <li>Engineered a Flask application on Google Cloud (Cloud Functions, BigQuery, Cloud Storage) integrating spaCy for skill extraction, TF-IDF vectorization, and cosine similarity to match candidate profiles with jobs in near real time &lt;500 ms.</li>
+            <li>Automated ETL workflows in BigQuery and orchestrated REST API endpoints via Cloud Functions, reducing manual job matching tasks by 70% and ensuring real time recommendation delivery.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="project-box">
+        <div class="project-title">Predictive Maintenance Dashboard</div>
+        <div class="project-details">
+          <ul>
+            <li>Developed Python ETL pipelines to ingest and preprocess IoT sensor data from Cloud Storage into BigQuery, then visualized anomaly detection and trend analysis with Power BI.</li>
+            <li>Trained and deployed XGBoost models using TensorFlow on AWS SageMaker achieving 92% precision in failure prediction, and integrated predictions into automated alerting via AWS Lambda.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="project-box">
+        <div class="project-title">Smart Door Chat</div>
+        <div class="project-details">
+          <ul>
+            <li>Developed an Edge AI smart door system on Raspberry Pi 4 using Dart & YOLOv5n for on-device computer vision, achieving sub-100 ms inference for visitor detection & real-time speech to text interaction with 95% accuracy; won 1st place at the GMU Hackathon.</li>
+            <li>Implemented secure MQTT messaging to a mobile app & leveraged Firebase Cloud Functions & Firestore for cloud processing & storage, building ETL pipelines to stream interaction logs into Power BI/Tableau dashboards for exploratory analysis & predictive maintenance insights.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="section skills hidden">
+    <div class="skills-group-list">
+      <div class="skills-group" onclick="toggleSkillGroup(this)">
+        <div class="skills-group-header">Programming Languages <span class="skills-toggle">&#9660;</span></div>
+        <div class="skills-group-content">
+          <div class="skills-grid">
+            <div class="skill-card">Python</div>
+            <div class="skill-card">SQL</div>
+            <div class="skill-card">R</div>
+            <div class="skill-card">Dart</div>
+          </div>
+        </div>
+      </div>
+      <div class="skills-group" onclick="toggleSkillGroup(this)">
+        <div class="skills-group-header">Frameworks & Libraries <span class="skills-toggle">&#9660;</span></div>
+        <div class="skills-group-content">
+          <div class="skills-grid">
+            <div class="skill-card">TensorFlow</div>
+            <div class="skill-card">XGBoost</div>
+            <div class="skill-card">spaCy</div>
+            <div class="skill-card">Flask</div>
+            <div class="skill-card">dbt</div>
+            <div class="skill-card">YOLOv5</div>
+          </div>
+        </div>
+      </div>
+      <div class="skills-group" onclick="toggleSkillGroup(this)">
+        <div class="skills-group-header">Cloud & DevOps <span class="skills-toggle">&#9660;</span></div>
+        <div class="skills-group-content">
+          <div class="skills-grid">
+            <div class="skill-card">AWS (S3, Redshift, Lambda, SageMaker)</div>
+            <div class="skill-card">Google Cloud (BigQuery, Cloud Functions, Cloud Storage)</div>
+            <div class="skill-card">Firebase</div>
+            <div class="skill-card">MQTT</div>
+            <div class="skill-card">Edge AI</div>
+          </div>
+        </div>
+      </div>
+      <div class="skills-group" onclick="toggleSkillGroup(this)">
+        <div class="skills-group-header">Data Visualization <span class="skills-toggle">&#9660;</span></div>
+        <div class="skills-group-content">
+          <div class="skills-grid">
+            <div class="skill-card">Power BI</div>
+            <div class="skill-card">Tableau</div>
+          </div>
+        </div>
+      </div>
+      <div class="skills-group" onclick="toggleSkillGroup(this)">
+        <div class="skills-group-header">Tools & Platforms <span class="skills-toggle">&#9660;</span></div>
+        <div class="skills-group-content">
+          <div class="skills-grid">
+            <div class="skill-card">Git & GitHub</div>
+            <div class="skill-card">Confluence</div>
+            <div class="skill-card">PostgreSQL</div>
+            <div class="skill-card">ETL Pipelines</div>
+            <div class="skill-card">Machine Learning</div>
+            <div class="skill-card">Data Visualization</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="dashboards" class="section dashboards hidden">
+    <h2>Dashboards</h2>
+    <div class="dashboards-placeholder">
+      <!-- Add dashboard links, images, or embeds here -->
+      <div class="dashboard-card">Your dashboard content goes here. Add Power BI/Tableau links or screenshots!</div>
+    </div>
+  </section>
+
+  <script>
+    function showSection(sectionName) {
+      // Hide all sections
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(section => {
+        section.classList.add('hidden');
+      });
+      // Show the selected section
+      if (sectionName === 'home') {
+        document.querySelector('.hero').style.display = 'flex';
+      } else {
+        document.querySelector('.hero').style.display = 'none';
+        const selectedSection = document.getElementById(sectionName);
+        if (selectedSection) {
+          selectedSection.classList.remove('hidden');
+        }
+        // Remove slide-in, just close boxes if not education
+        if (sectionName !== 'education') {
+          const msBox = document.getElementById('msBox');
+          const beBox = document.getElementById('beBox');
+          if (msBox) msBox.classList.remove('open');
+          if (beBox) beBox.classList.remove('open');
+        }
+      }
+      // Update active state in main top navigation
+      const navItems = document.querySelectorAll('.main-top-nav ul li');
+      navItems.forEach(item => {
+        item.classList.remove('active');
+        if (item.getAttribute('data-section') === sectionName) {
+          item.classList.add('active');
+        }
+      });
+    }
+
+    // Toggle expand/collapse for education box
+    function toggleBox(box) {
+      box.classList.toggle('open');
+    }
+
+    // Only one experience box open at a time
+    function expandExperience(box) {
+      const all = document.querySelectorAll('.experience-box');
+      all.forEach(b => { if (b !== box) b.classList.remove('open'); });
+      box.classList.toggle('open');
+    }
+
+    function toggleSkillGroup(group) {
+      const all = document.querySelectorAll('.skills-group');
+      all.forEach(g => { if (g !== group) g.classList.remove('open'); });
+      group.classList.toggle('open');
+    }
+  </script>
+</body>
+</html>
