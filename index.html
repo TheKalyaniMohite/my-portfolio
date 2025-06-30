@@ -8,11 +8,11 @@
     body {
       margin: 0;
       padding: 0;
-      background-color: #000;
       color: #fff;
       font-family: Helvetica, sans-serif;
       overflow-x: hidden;
       padding-top: 64px;
+      min-height: 100vh;
     }
     .hero {
       height: 100vh;
@@ -22,6 +22,8 @@
       align-items: center;
       position: relative;
       text-align: center;
+      background: linear-gradient(135deg, rgba(17,17,17,0.7) 0%, rgba(255,255,255,0.3) 100%), url('home1.jpg') center center/cover no-repeat;
+      background-blend-mode: overlay;
     }
     .hero-intro {
       font-size: 1.15rem;
@@ -123,6 +125,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      background: linear-gradient(135deg, #111 0%, #fff 100%);
     }
     .education {
       background-color: #111;
@@ -209,7 +212,7 @@
       align-items: center;
     }
     .education-box {
-      background: linear-gradient(90deg, #8e24aa 0 6px, #23213a 6px 100%);
+      background: #000;
       color: #fff;
       border-radius: 22px;
       box-shadow: 0 6px 32px rgba(142,36,170,0.13);
@@ -229,8 +232,8 @@
     .education-box-header {
       font-size: 1.5rem;
       font-weight: bold;
-      background: #00e676;
-      color: #111;
+      background: #000;
+      color: #fff;
       padding: 28px 40px;
       border-radius: 18px 18px 0 0;
       letter-spacing: 0.05em;
@@ -238,7 +241,7 @@
       text-align: left;
     }
     .education-box.open .education-box-header {
-      background: #00b050;
+      background: #111;
       color: #fff;
     }
     .education-box-details {
@@ -278,7 +281,7 @@
       align-items: center;
     }
     .experience-box {
-      background: linear-gradient(90deg, #8e24aa 0 6px, #23213a 6px 100%);
+      background: #000;
       color: #fff;
       border-radius: 18px;
       box-shadow: 0 6px 32px rgba(142,36,170,0.13);
@@ -299,7 +302,7 @@
       display: flex;
       flex-direction: column;
       gap: 2px;
-      background: #8e24aa;
+      background: #000;
       color: #fff;
       padding: 16px 28px 10px 28px;
       border-radius: 14px 14px 0 0;
@@ -308,7 +311,7 @@
       position: relative;
     }
     .experience-box.open .experience-header {
-      background: #6a1b9a;
+      background: #111;
       color: #fff;
     }
     .experience-title {
@@ -406,19 +409,20 @@
     .project-boxes {
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 40px;
       width: 100%;
-      max-width: 700px;
+      max-width: 900px;
       margin: 0 auto;
       align-items: center;
     }
     .project-box {
-      background: linear-gradient(90deg, #8e24aa 0 6px, #23213a 6px 100%);
+      background: #000;
       color: #fff;
-      border-radius: 14px;
+      border-radius: 22px;
       box-shadow: 0 6px 32px rgba(142,36,170,0.13);
       width: 100%;
-      max-width: 700px;
+      max-width: 900px;
+      cursor: pointer;
       overflow: hidden;
       transition: box-shadow 0.3s, transform 0.2s;
       margin-bottom: 0;
@@ -430,28 +434,48 @@
       transform: translateY(-4px) scale(1.015);
     }
     .project-title {
-      font-size: 1.15rem;
+      font-size: 1.5rem;
       font-weight: bold;
-      background: #8e24aa;
+      background: #000;
       color: #fff;
-      padding: 16px 28px 10px 28px;
-      border-radius: 14px 14px 0 0;
-      letter-spacing: 0.03em;
+      padding: 28px 40px;
+      border-radius: 18px 18px 0 0;
+      letter-spacing: 0.05em;
       transition: background 0.3s;
       text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .project-box.open .project-title {
+      background: #111;
+      color: #fff;
+    }
+    .project-toggle {
+      font-size: 1.2em;
+      color: #fff;
+      background: none;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      margin-left: 10px;
+      transition: color 0.2s;
+    }
+    .project-toggle:focus {
+      color: #8e24aa;
     }
     .project-details {
-      padding: 12px 28px 18px 28px;
-      background: #23213a;
+      max-height: 0;
+      overflow: hidden;
+      background: #222;
+      color: #fff;
+      padding: 0 40px;
+      transition: max-height 0.5s cubic-bezier(.77,0,.18,1), padding 0.5s;
+      font-size: 1.08rem;
     }
-    .project-details ul {
-      margin: 0 0 0 18px;
-      padding: 0;
-      font-size: 0.98rem;
-    }
-    .project-details li {
-      margin-bottom: 8px;
-      line-height: 1.5;
+    .project-box.open .project-details {
+      max-height: 500px;
+      padding: 24px 40px 36px 40px;
     }
     .skills {
       background-color: #111;
@@ -465,22 +489,83 @@
       margin: 40px auto 0 auto;
       width: 100%;
     }
-    .skill-card {
-      background: #23213a;
-      color: #fff;
-      border-radius: 12px;
+    .skills-group-list {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .skills-group {
+      background: #000;
+      border-radius: 14px;
       box-shadow: 0 2px 8px rgba(142,36,170,0.10);
-      padding: 18px 12px;
-      font-size: 1.05rem;
-      font-weight: 500;
-      text-align: center;
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+      cursor: pointer;
+      color: #fff;
+    }
+    .skills-group-header {
+      font-size: 1.13rem;
+      font-weight: bold;
+      color: #fff;
+      background: #000;
+      padding: 18px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       letter-spacing: 0.01em;
+      user-select: none;
+    }
+    .skills-group.open .skills-group-header {
+      background: #111;
+    }
+    .skills-toggle {
+      font-size: 1.1em;
+      margin-left: 10px;
+      transition: transform 0.3s;
+    }
+    .skills-group.open .skills-toggle {
+      transform: rotate(180deg);
+    }
+    .skills-group-content {
+      color: #fff;
+    }
+    .skill-card {
+      position: relative;
+      cursor: pointer;
+      user-select: none;
       transition: box-shadow 0.2s, background 0.2s;
     }
-    .skill-card:hover {
-      background: #8e24aa;
+    .skill-card .skill-toggle {
+      position: absolute;
+      right: 12px;
+      top: 10px;
+      font-size: 1.1em;
       color: #fff;
-      box-shadow: 0 4px 16px rgba(142,36,170,0.18);
+      background: none;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      transition: color 0.2s;
+      z-index: 2;
+    }
+    .skill-card.open .skill-toggle {
+      color: #8e24aa;
+    }
+    .skill-desc {
+      max-height: 0;
+      overflow: hidden;
+      color: #fff;
+      background: #111;
+      font-size: 0.97rem;
+      padding: 0 8px;
+      border-radius: 0 0 10px 10px;
+      transition: max-height 0.4s cubic-bezier(.77,0,.18,1), padding 0.4s;
+    }
+    .skill-card.open .skill-desc {
+      max-height: 80px;
+      padding: 10px 8px 12px 8px;
     }
     /* Fixed top navigation bar for all pages */
     .main-top-nav {
@@ -489,7 +574,7 @@
       left: 0;
       width: 100vw;
       z-index: 2000;
-      background: rgba(20, 20, 30, 0.98);
+      background: #000;
       box-shadow: 0 2px 12px rgba(0,0,0,0.08);
       padding: 0;
       display: flex;
@@ -519,55 +604,6 @@
       background: #8e24aa;
       color: #fff;
     }
-    .skills-group-list {
-      max-width: 900px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-    .skills-group {
-      background: #23213a;
-      border-radius: 14px;
-      box-shadow: 0 2px 8px rgba(142,36,170,0.10);
-      overflow: hidden;
-      transition: box-shadow 0.2s;
-      cursor: pointer;
-    }
-    .skills-group-header {
-      font-size: 1.13rem;
-      font-weight: bold;
-      color: #fff;
-      background: #8e24aa;
-      padding: 18px 28px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      letter-spacing: 0.01em;
-      user-select: none;
-    }
-    .skills-group.open .skills-group-header {
-      background: #6a1b9a;
-    }
-    .skills-toggle {
-      font-size: 1.1em;
-      margin-left: 10px;
-      transition: transform 0.3s;
-    }
-    .skills-group.open .skills-toggle {
-      transform: rotate(180deg);
-    }
-    .skills-group-content {
-      max-height: 0;
-      overflow: hidden;
-      background: #23213a;
-      transition: max-height 0.5s cubic-bezier(.77,0,.18,1), padding 0.5s;
-      padding: 0 28px;
-    }
-    .skills-group.open .skills-group-content {
-      max-height: 400px;
-      padding: 18px 28px 24px 28px;
-    }
     .dashboards {
       background-color: #111;
       padding-top: 0;
@@ -592,6 +628,51 @@
       font-size: 1.1rem;
       font-weight: 500;
       margin-bottom: 0;
+    }
+    @media (max-width: 1024px) {
+      .project-boxes, .education-boxes {
+        max-width: 98vw;
+        padding-left: 0;
+        padding-right: 0;
+      }
+      .project-box, .education-box {
+        max-width: 98vw;
+        padding-left: 0;
+        padding-right: 0;
+      }
+      .project-title, .education-box-header {
+        padding: 22px 18px;
+        font-size: 1.2rem;
+      }
+      .project-details, .education-box-details {
+        padding: 0 18px;
+        font-size: 1rem;
+      }
+      .project-box.open .project-details, .education-box.open .education-box-details {
+        padding: 18px 18px 24px 18px;
+      }
+    }
+    @media (max-width: 600px) {
+      .project-boxes, .education-boxes {
+        max-width: 100vw;
+        gap: 18px;
+      }
+      .project-box, .education-box {
+        max-width: 100vw;
+        border-radius: 12px;
+      }
+      .project-title, .education-box-header {
+        padding: 14px 8px;
+        font-size: 1rem;
+        border-radius: 10px 10px 0 0;
+      }
+      .project-details, .education-box-details {
+        padding: 0 8px;
+        font-size: 0.97rem;
+      }
+      .project-box.open .project-details, .education-box.open .education-box-details {
+        padding: 10px 8px 14px 8px;
+      }
     }
   </style>
 </head>
@@ -729,8 +810,8 @@
 
   <section id="projects" class="section projects hidden">
     <div class="project-boxes">
-      <div class="project-box">
-        <div class="project-title">AI-Powered Resume Analyzer & Job Matcher</div>
+      <div class="project-box" onclick="expandProject(this)">
+        <div class="project-title">AI-Powered Resume Analyzer & Job Matcher <button class="project-toggle">&#9660;</button></div>
         <div class="project-details">
           <ul>
             <li>Engineered a Flask application on Google Cloud (Cloud Functions, BigQuery, Cloud Storage) integrating spaCy for skill extraction, TF-IDF vectorization, and cosine similarity to match candidate profiles with jobs in near real time &lt;500 ms.</li>
@@ -738,8 +819,8 @@
           </ul>
         </div>
       </div>
-      <div class="project-box">
-        <div class="project-title">Predictive Maintenance Dashboard</div>
+      <div class="project-box" onclick="expandProject(this)">
+        <div class="project-title">Predictive Maintenance Dashboard <button class="project-toggle">&#9660;</button></div>
         <div class="project-details">
           <ul>
             <li>Developed Python ETL pipelines to ingest and preprocess IoT sensor data from Cloud Storage into BigQuery, then visualized anomaly detection and trend analysis with Power BI.</li>
@@ -747,12 +828,21 @@
           </ul>
         </div>
       </div>
-      <div class="project-box">
-        <div class="project-title">Smart Door Chat</div>
+      <div class="project-box" onclick="expandProject(this)">
+        <div class="project-title">Smart Door Chat <button class="project-toggle">&#9660;</button></div>
         <div class="project-details">
           <ul>
             <li>Developed an Edge AI smart door system on Raspberry Pi 4 using Dart & YOLOv5n for on-device computer vision, achieving sub-100 ms inference for visitor detection & real-time speech to text interaction with 95% accuracy; won 1st place at the GMU Hackathon.</li>
             <li>Implemented secure MQTT messaging to a mobile app & leveraged Firebase Cloud Functions & Firestore for cloud processing & storage, building ETL pipelines to stream interaction logs into Power BI/Tableau dashboards for exploratory analysis & predictive maintenance insights.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="project-box" onclick="expandProject(this)">
+        <div class="project-title">Market Basket Analysis <button class="project-toggle">&#9660;</button></div>
+        <div class="project-details">
+          <ul>
+            <li><strong>Overview:</strong> This notebook-driven project performs a Market Basket Analysis at the aisle/category level using the Instacart "Online Grocery Basket Analysis" dataset. By mining association rules, it uncovers which store aisles tend to co-occur in customer orders—insights that can inform store layout, cross-merchandising, and targeted promotions.</li>
+            <li><strong>Github link:</strong> <a href="https://github.com/TheKalyaniMohite/Market-Basket-Analysis" target="_blank">https://github.com/TheKalyaniMohite/Market-Basket-Analysis</a></li>
           </ul>
         </div>
       </div>
@@ -765,10 +855,10 @@
         <div class="skills-group-header">Programming Languages <span class="skills-toggle">&#9660;</span></div>
         <div class="skills-group-content">
           <div class="skills-grid">
-            <div class="skill-card">Python</div>
-            <div class="skill-card">SQL</div>
-            <div class="skill-card">R</div>
-            <div class="skill-card">Dart</div>
+            <div class="skill-card" onclick="expandSkill(event, this)">Python <button class="skill-toggle">&#9660;</button><div class="skill-desc">Python is a versatile programming language for data analysis, machine learning, and automation.</div></div>
+            <div class="skill-card" onclick="expandSkill(event, this)">SQL <button class="skill-toggle">&#9660;</button><div class="skill-desc">SQL is used for managing and querying relational databases.</div></div>
+            <div class="skill-card" onclick="expandSkill(event, this)">R <button class="skill-toggle">&#9660;</button><div class="skill-desc">R is a language for statistical computing and graphics.</div></div>
+            <div class="skill-card" onclick="expandSkill(event, this)">Dart <button class="skill-toggle">&#9660;</button><div class="skill-desc">Dart is used for building cross-platform apps, especially with Flutter.</div></div>
           </div>
         </div>
       </div>
@@ -776,12 +866,12 @@
         <div class="skills-group-header">Frameworks & Libraries <span class="skills-toggle">&#9660;</span></div>
         <div class="skills-group-content">
           <div class="skills-grid">
-            <div class="skill-card">TensorFlow</div>
-            <div class="skill-card">XGBoost</div>
-            <div class="skill-card">spaCy</div>
-            <div class="skill-card">Flask</div>
-            <div class="skill-card">dbt</div>
-            <div class="skill-card">YOLOv5</div>
+            <div class="skill-card" onclick="expandSkill(event, this)">TensorFlow <button class="skill-toggle">&#9660;</button><div class="skill-desc">TensorFlow is an open-source platform for machine learning and deep learning.</div></div>
+            <div class="skill-card" onclick="expandSkill(event, this)">XGBoost <button class="skill-toggle">&#9660;</button><div class="skill-desc">XGBoost is a powerful library for gradient boosting and predictive modeling.</div></div>
+            <div class="skill-card" onclick="expandSkill(event, this)">spaCy <button class="skill-toggle">&#9660;</button><div class="skill-desc">spaCy is a library for advanced Natural Language Processing in Python.</div></div>
+            <div class="skill-card" onclick="expandSkill(event, this)">Flask <button class="skill-toggle">&#9660;</button><div class="skill-desc">Flask is a lightweight Python web framework for building APIs and web apps.</div></div>
+            <div class="skill-card" onclick="expandSkill(event, this)">dbt <button class="skill-toggle">&#9660;</button><div class="skill-desc">dbt is a tool for data transformation and analytics engineering.</div></div>
+            <div class="skill-card" onclick="expandSkill(event, this)">YOLOv5 <button class="skill-toggle">&#9660;</button><div class="skill-desc">YOLOv5 is a real-time object detection model.</div></div>
           </div>
         </div>
       </div>
@@ -789,11 +879,11 @@
         <div class="skills-group-header">Cloud & DevOps <span class="skills-toggle">&#9660;</span></div>
         <div class="skills-group-content">
           <div class="skills-grid">
-            <div class="skill-card">AWS (S3, Redshift, Lambda, SageMaker)</div>
-            <div class="skill-card">Google Cloud (BigQuery, Cloud Functions, Cloud Storage)</div>
-            <div class="skill-card">Firebase</div>
-            <div class="skill-card">MQTT</div>
-            <div class="skill-card">Edge AI</div>
+            <div class="skill-card" onclick="expandSkill(event, this)">AWS (S3, Redshift, Lambda, SageMaker) <button class="skill-toggle">&#9660;</button><div class="skill-desc">Amazon Web Services for cloud storage, compute, and machine learning.</div></div>
+            <div class="skill-card" onclick="expandSkill(event, this)">Google Cloud (BigQuery, Cloud Functions, Cloud Storage) <button class="skill-toggle">&#9660;</button><div class="skill-desc">Google Cloud Platform for scalable data and compute solutions.</div></div>
+            <div class="skill-card" onclick="expandSkill(event, this)">Firebase <button class="skill-toggle">&#9660;</button><div class="skill-desc">Firebase is a platform for building mobile and web applications.</div></div>
+            <div class="skill-card" onclick="expandSkill(event, this)">MQTT <button class="skill-toggle">&#9660;</button><div class="skill-desc">MQTT is a lightweight messaging protocol for IoT.</div></div>
+            <div class="skill-card" onclick="expandSkill(event, this)">Edge AI <button class="skill-toggle">&#9660;</button><div class="skill-desc">Edge AI brings machine learning to edge devices for real-time inference.</div></div>
           </div>
         </div>
       </div>
@@ -801,8 +891,8 @@
         <div class="skills-group-header">Data Visualization <span class="skills-toggle">&#9660;</span></div>
         <div class="skills-group-content">
           <div class="skills-grid">
-            <div class="skill-card">Power BI</div>
-            <div class="skill-card">Tableau</div>
+            <div class="skill-card" onclick="expandSkill(event, this)">Power BI <button class="skill-toggle">&#9660;</button><div class="skill-desc">Power BI is a business analytics tool for interactive data visualization.</div></div>
+            <div class="skill-card" onclick="expandSkill(event, this)">Tableau <button class="skill-toggle">&#9660;</button><div class="skill-desc">Tableau is a data visualization platform for business intelligence.</div></div>
           </div>
         </div>
       </div>
@@ -810,12 +900,12 @@
         <div class="skills-group-header">Tools & Platforms <span class="skills-toggle">&#9660;</span></div>
         <div class="skills-group-content">
           <div class="skills-grid">
-            <div class="skill-card">Git & GitHub</div>
-            <div class="skill-card">Confluence</div>
-            <div class="skill-card">PostgreSQL</div>
-            <div class="skill-card">ETL Pipelines</div>
-            <div class="skill-card">Machine Learning</div>
-            <div class="skill-card">Data Visualization</div>
+            <div class="skill-card" onclick="expandSkill(event, this)">Git & GitHub <button class="skill-toggle">&#9660;</button><div class="skill-desc">Git is a version control system; GitHub is a platform for code hosting and collaboration.</div></div>
+            <div class="skill-card" onclick="expandSkill(event, this)">Confluence <button class="skill-toggle">&#9660;</button><div class="skill-desc">Confluence is a team workspace for documentation and collaboration.</div></div>
+            <div class="skill-card" onclick="expandSkill(event, this)">PostgreSQL <button class="skill-toggle">&#9660;</button><div class="skill-desc">PostgreSQL is a powerful open-source relational database system.</div></div>
+            <div class="skill-card" onclick="expandSkill(event, this)">ETL Pipelines <button class="skill-toggle">&#9660;</button><div class="skill-desc">ETL pipelines extract, transform, and load data for analytics.</div></div>
+            <div class="skill-card" onclick="expandSkill(event, this)">Machine Learning <button class="skill-toggle">&#9660;</button><div class="skill-desc">Machine learning enables computers to learn from data and make predictions.</div></div>
+            <div class="skill-card" onclick="expandSkill(event, this)">Data Visualization <button class="skill-toggle">&#9660;</button><div class="skill-desc">Data visualization is the graphical representation of information and data.</div></div>
           </div>
         </div>
       </div>
@@ -880,6 +970,19 @@
       const all = document.querySelectorAll('.skills-group');
       all.forEach(g => { if (g !== group) g.classList.remove('open'); });
       group.classList.toggle('open');
+    }
+
+    function expandProject(box) {
+      const all = document.querySelectorAll('.project-box');
+      all.forEach(b => { if (b !== box) b.classList.remove('open'); });
+      box.classList.toggle('open');
+    }
+
+    function expandSkill(event, card) {
+      event.stopPropagation();
+      const all = document.querySelectorAll('.skill-card');
+      all.forEach(c => { if (c !== card) c.classList.remove('open'); });
+      card.classList.toggle('open');
     }
   </script>
 </body>
