@@ -650,11 +650,28 @@
       background: #000;
       box-shadow: 0 2px 12px rgba(0,0,0,0.08);
       padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       height: 64px;
-      transition: height 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .main-top-nav .nav-flex {
+      width: 100vw;
+      max-width: 1200px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10px;
+      height: 64px;
+      position: relative;
+    }
+    .main-top-nav .nav-logo {
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+      padding-left: 10px;
+      user-select: none;
     }
     .main-top-nav ul {
       display: flex;
@@ -663,6 +680,9 @@
       margin: 0;
       padding: 0;
       align-items: center;
+      background: none;
+      position: static;
+      box-shadow: none;
     }
     .main-top-nav li {
       color: #fff;
@@ -678,77 +698,6 @@
       background: #8e24aa;
       color: #fff;
     }
-    .dashboards {
-      background-color: #111;
-      padding-top: 0;
-    }
-    .dashboards-placeholder {
-      max-width: 700px;
-      margin: 40px auto 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      align-items: center;
-    }
-    .dashboard-card {
-      background: linear-gradient(90deg, #8e24aa 0 6px, #23213a 6px 100%);
-      color: #fff;
-      border-radius: 14px;
-      box-shadow: 0 6px 32px rgba(142,36,170,0.13);
-      width: 100%;
-      max-width: 700px;
-      padding: 32px 28px;
-      text-align: center;
-      font-size: 1.1rem;
-      font-weight: 500;
-      margin-bottom: 0;
-    }
-    @media (max-width: 1024px) {
-      .project-boxes, .education-boxes {
-        max-width: 98vw;
-        padding-left: 0;
-        padding-right: 0;
-      }
-      .project-box, .education-box {
-        max-width: 98vw;
-        padding-left: 0;
-        padding-right: 0;
-      }
-      .project-title, .education-box-header {
-        padding: 22px 18px;
-        font-size: 1.2rem;
-      }
-      .project-details, .education-box-details {
-        padding: 0 18px;
-        font-size: 1rem;
-      }
-      .project-box.open .project-details, .education-box.open .education-box-details {
-        padding: 18px 18px 24px 18px;
-      }
-    }
-    @media (max-width: 600px) {
-      .project-boxes, .education-boxes {
-        max-width: 100vw;
-        gap: 18px;
-      }
-      .project-box, .education-box {
-        max-width: 100vw;
-        border-radius: 12px;
-      }
-      .project-title, .education-box-header {
-        padding: 14px 8px;
-        font-size: 1rem;
-        border-radius: 10px 10px 0 0;
-      }
-      .project-details, .education-box-details {
-        padding: 0 8px;
-        font-size: 0.97rem;
-      }
-      .project-box.open .project-details, .education-box.open .education-box-details {
-        padding: 10px 8px 14px 8px;
-      }
-    }
-    /* --- Responsive Hamburger Menu --- */
     .hamburger {
       display: none;
       flex-direction: column;
@@ -760,7 +709,7 @@
       z-index: 3000;
       background: none;
       border: none;
-      margin-right: 10px;
+      margin-left: 10px;
     }
     .hamburger span {
       display: block;
@@ -771,27 +720,19 @@
       border-radius: 2px;
       transition: 0.3s;
     }
-    .main-top-nav {
-      /* ... existing ... */
-      transition: height 0.3s;
-    }
-    .main-top-nav.open {
-      height: auto;
-    }
     @media (max-width: 900px) {
       .main-top-nav ul {
         gap: 1.2rem;
       }
     }
     @media (max-width: 700px) {
-      .main-top-nav {
-        flex-direction: row;
-        height: 64px;
+      .main-top-nav .nav-flex {
         padding: 0 0 0 0;
       }
       .main-top-nav ul {
         position: absolute;
         top: 64px;
+        right: 0;
         left: 0;
         width: 100vw;
         background: #000;
@@ -814,52 +755,16 @@
       }
       .hamburger {
         display: flex;
+        margin-left: auto;
+      }
+      .main-top-nav .nav-logo {
+        padding-left: 10px;
       }
     }
     @media (max-width: 600px) {
-      h1 {
-        font-size: 2.1rem;
-      }
-      .hero-intro {
+      .main-top-nav .nav-logo {
         font-size: 1rem;
-        margin: 18px 0 0 0;
-        text-align: left;
-      }
-      .section {
-        padding: 40px 4px;
-      }
-      .education h2 {
-        font-size: 2rem;
-      }
-      .education-boxes, .project-boxes, .skills-group-list, .experience-boxes {
-        gap: 10px;
-        max-width: 100vw;
-        padding: 0;
-      }
-      .education-box, .project-box, .skills-group, .experience-box {
-        max-width: 100vw;
-        border-radius: 10px;
-        margin: 0 0 10px 0;
-      }
-      .education-box-header, .project-title, .skills-group-header, .experience-header {
-        padding: 10px 6px;
-        font-size: 1rem;
-      }
-      .education-box-details, .project-details, .skills-group-content, .experience-details {
-        padding: 0 6px;
-        font-size: 0.97rem;
-      }
-      .education-box.open .education-box-details, .project-box.open .project-details, .skills-group.open .skills-group-content, .experience-box.open .experience-details {
-        padding: 8px 6px 12px 6px;
-      }
-      .social-row {
-        gap: 16px;
-        margin-top: 18px;
-      }
-      .social-link {
-        width: 38px;
-        height: 38px;
-        font-size: 1.3rem;
+        padding-left: 6px;
       }
     }
     html, body {
@@ -869,12 +774,25 @@
   </style>
 </head>
 <body>
-  <!-- Hamburger for mobile nav -->
-  <button class="hamburger" id="hamburgerBtn" aria-label="Open navigation" aria-expanded="false">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
+  <!-- Navigation bar with hamburger inside -->
+  <nav class="main-top-nav" id="mainTopNav">
+    <div class="nav-flex">
+      <div class="nav-logo">Kalyani</div>
+      <ul>
+        <li onclick="showSection('home')" data-section="home">Home</li>
+        <li onclick="showSection('education')" data-section="education">Education</li>
+        <li onclick="showSection('experience')" data-section="experience">Experience</li>
+        <li onclick="showSection('projects')" data-section="projects">Projects</li>
+        <li onclick="showSection('skills')" data-section="skills">Skills</li>
+        <li onclick="showSection('dashboards')" data-section="dashboards">Dashboards</li>
+      </ul>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Open navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
   <section class="hero">
     <h1>KALYANI MOHITE</h1>
     <div class="hero-intro">
@@ -895,18 +813,6 @@
       </a>
     </div>
   </section>
-
-  <!-- Navigation bar moved to top -->
-  <nav class="main-top-nav" id="mainTopNav">
-    <ul>
-      <li onclick="showSection('home')" data-section="home">Home</li>
-      <li onclick="showSection('education')" data-section="education">Education</li>
-      <li onclick="showSection('experience')" data-section="experience">Experience</li>
-      <li onclick="showSection('projects')" data-section="projects">Projects</li>
-      <li onclick="showSection('skills')" data-section="skills">Skills</li>
-      <li onclick="showSection('dashboards')" data-section="dashboards">Dashboards</li>
-    </ul>
-  </nav>
 
   <section id="education" class="section education hidden">
     <div class="education-boxes">
@@ -1186,12 +1092,13 @@
     // Hamburger menu logic
     const hamburgerBtn = document.getElementById('hamburgerBtn');
     const mainTopNav = document.getElementById('mainTopNav');
+    const navUl = mainTopNav.querySelector('ul');
     hamburgerBtn.addEventListener('click', function() {
       const isOpen = mainTopNav.classList.toggle('open');
       hamburgerBtn.setAttribute('aria-expanded', isOpen);
     });
     // Close nav when clicking a link (on mobile)
-    mainTopNav.querySelectorAll('li').forEach(li => {
+    navUl.querySelectorAll('li').forEach(li => {
       li.addEventListener('click', () => {
         if (window.innerWidth <= 700) {
           mainTopNav.classList.remove('open');
